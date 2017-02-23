@@ -45,11 +45,19 @@
   }
 
   function setVoice() {
+    msg.voice = voices.find(voice => voice.name === this.value);
+    toggle();
+  }
 
+  function toggle(startOver = true) {
+    SpeechSynthesis.cancel();
+    if (startOver) {
+      SpeechSynthesis.speak(msg);
+    }
   }
 
   SpeechSynthesis.addEventListener('voiceschanged', populatedVoices);
-  voicesDropdown.addEventListener('change', setVoice)
+  voicesDropdown.addEventListener('change', setVoice);
 </script>
 
 </body>
